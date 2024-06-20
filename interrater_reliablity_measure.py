@@ -74,6 +74,14 @@ def generate_interrater_reliablity_social_behavior_percentage(e_dict, u_dict):
     print(f'Pearson correlation: {correlation}')
     print(f'p-value: {p_value}')
 
+    generate_deviation_rank(merged_sbp_df)
+
+def generate_deviation_rank(df): 
+    df['deviation'] = abs(df['social_behavior_percentage_e'] - df['social_behavior_percentage_u'])
+    ranked_df = df.sort_values(by='deviation', ascending=False).reset_index(drop=True)
+    ranked_df[['participant_id', 'social_behavior_percentage_e', 'social_behavior_percentage_u', 'deviation']].to_csv('ranked_social_behavior_deviation.csv', index=False)
+
+
 def generate_interrater_reliablity_sitting_distance(e_dict, u_dict):
     
     e_sitting_distance = e_dict[e_dict['target_of_interaction'].str.lower() == 'robot']
