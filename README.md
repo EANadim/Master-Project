@@ -19,7 +19,7 @@ To measure the inter-rater reliability you have to put both files in this direct
 Then you run 
 
 ```bash
-python ranked_social_behavior_deviation.py
+python interrater_reliablity_measure.py
 ```
 
 This command will generate two behavior reports for each coder: `behavior_report_ehtesham.csv` and `behavior_report_usman.csv`. Each behavior report will include scores for social behavior, non-social behavior, and the percentage of social behavior for each participant.
