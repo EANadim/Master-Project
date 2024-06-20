@@ -6,6 +6,8 @@ from scipy.stats import pearsonr
 from sklearn.metrics import cohen_kappa_score
 
 def calculate_behavior(sheets_dict):
+    """Calculates the total social behavior, non-social behavior & social behavior percentage score"""
+
     individual_behaviors = []
     for  name, df_sheet in sheets_dict.items():
         try:
@@ -34,6 +36,8 @@ def calculate_behavior(sheets_dict):
     return individual_behaviors
 
 def generate_behavior_report(individual_behaviors, file_name):
+    """Generates behavior report which is calculated by calculate_behavior function & then saves as the provided file name"""
+
     # Get the fieldnames from the first dictionary
     fieldnames = individual_behaviors[0].keys()
 
@@ -52,7 +56,8 @@ def generate_behavior_report(individual_behaviors, file_name):
     print("CSV file has been created successfully.")
 
 def generate_interrater_reliablity_social_behavior_percentage(e_dict, u_dict):
-    
+    """Generates behavior report which is calculated by calculate_behavior function & then saves as the provided file name"""
+
     # Select the first and sixth column from the given dataframes
     e_social_behavior_percentage = e_dict.iloc[:, [0, 6]]
     u_social_behavior_percentage = u_dict.iloc[:, [0, 6]]
@@ -77,13 +82,16 @@ def generate_interrater_reliablity_social_behavior_percentage(e_dict, u_dict):
     generate_deviation_rank(merged_sbp_df)
 
 def generate_deviation_rank(df): 
+    """A file named `ranked_social_behavior_deviation.csv` will be created, containing the ranked deviations of social behaviors for each participant according to each coder."""
+
     df['deviation'] = abs(df['social_behavior_percentage_e'] - df['social_behavior_percentage_u'])
     ranked_df = df.sort_values(by='deviation', ascending=False).reset_index(drop=True)
     ranked_df[['participant_id', 'social_behavior_percentage_e', 'social_behavior_percentage_u', 'deviation']].to_csv('ranked_social_behavior_deviation.csv', index=False)
 
 
 def generate_interrater_reliablity_sitting_distance(e_dict, u_dict):
-    
+    """Generate Cohen's Kappa for sitting distance in robot condition"""
+
     e_sitting_distance = e_dict[e_dict['target_of_interaction'].str.lower() == 'robot']
     u_sitting_distance = u_dict[u_dict['target_of_interaction'].str.lower() == 'robot']
 
@@ -107,6 +115,7 @@ def generate_interrater_reliablity_sitting_distance(e_dict, u_dict):
     print(f"Cohen's Kappa for sitting distance in terms of robot: {kappa}")
 
 def generate_interrater_reliablity_sitting_angle(e_dict, u_dict):
+    """Generate Cohen's Kappa for sitting angle in robot condition"""
 
     e_sitting_angle = e_dict[e_dict['target_of_interaction'].str.lower() == 'robot']
     u_sitting_angle = u_dict[u_dict['target_of_interaction'].str.lower() == 'robot']
@@ -130,9 +139,12 @@ def generate_interrater_reliablity_sitting_angle(e_dict, u_dict):
     kappa = cohen_kappa_score(e_values_cleaned, u_values_cleaned)
     print(f"Cohen's Kappa for sitting angle in terms of robot: {kappa}")
 
+
+# These coding sheets with the correspondent names should be present in this directory while running this script
 coding_sheet_name_1 = "coding_ehtesham.xlsx"
 coding_sheet_name_2 = "coding_usman.xlsx"
 
+# The generated behavior report files will have these correspondent names
 behavior_report_name_1 = "behavior_report_ehtesham.csv"
 behavior_report_name_2 = "behavior_report_usman.csv"
 
