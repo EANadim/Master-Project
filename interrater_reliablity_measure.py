@@ -8,8 +8,8 @@ def generate_interrater_reliablity_social_behavior_percentage(e_dict, u_dict):
     """Generates behavior report which is calculated by calculate_behavior function & then saves as the provided file name"""
 
     # Select the first and sixth column from the given dataframes
-    e_social_behavior_percentage = e_dict.iloc[:, [0, 6]]
-    u_social_behavior_percentage = u_dict.iloc[:, [0, 6]]
+    e_social_behavior_percentage = e_dict.iloc[:, [0, 7]]
+    u_social_behavior_percentage = u_dict.iloc[:, [0, 7]]
 
     # Merge the DataFrames on participant_id
     merged_sbp_df = pd.merge(e_social_behavior_percentage, u_social_behavior_percentage, on='participant_id', suffixes=('_e', '_u'))
@@ -45,8 +45,8 @@ def generate_interrater_reliablity_sitting_distance(e_dict, u_dict):
     u_sitting_distance = u_dict[u_dict['target_of_interaction'].str.lower() == 'robot']
 
     # Select the first and third column from the given dataframes
-    e_sitting_distance = e_sitting_distance.iloc[:, [0, 2]]
-    u_sitting_distance = u_sitting_distance.iloc[:, [0, 2]]
+    e_sitting_distance = e_sitting_distance.iloc[:, [0, 3]]
+    u_sitting_distance = u_sitting_distance.iloc[:, [0, 3]]
 
     # Merge the DataFrames on participant_id
     merged_sbp_df = pd.merge(e_sitting_distance, u_sitting_distance, on='participant_id', suffixes=('_e', '_u'))
@@ -70,8 +70,8 @@ def generate_interrater_reliablity_sitting_angle(e_dict, u_dict):
     u_sitting_angle = u_dict[u_dict['target_of_interaction'].str.lower() == 'robot']
 
     # Select the first and third column from the given dataframes
-    e_sitting_angle = e_sitting_angle.iloc[:, [0, 3]]
-    u_sitting_angle = u_sitting_angle.iloc[:, [0, 3]]
+    e_sitting_angle = e_sitting_angle.iloc[:, [0, 4]]
+    u_sitting_angle = u_sitting_angle.iloc[:, [0, 4]]
 
     # Merge the DataFrames on participant_id
     merged_sbp_df = pd.merge(e_sitting_angle, u_sitting_angle, on='participant_id', suffixes=('_e', '_u'))
