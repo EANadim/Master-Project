@@ -1,59 +1,8 @@
 import pandas as pd
-import csv
 import numpy as np
 
 from scipy.stats import pearsonr
 from sklearn.metrics import cohen_kappa_score
-
-def calculate_behavior(sheets_dict):
-    """Calculates the total social behavior, non-social behavior & social behavior percentage score"""
-
-    individual_behaviors = []
-    for  name, df_sheet in sheets_dict.items():
-        try:
-            individual_behavior = {}
-            
-            individual_behavior["participant_id"] = name
-            individual_behavior["target_of_interaction"] = df_sheet[df_sheet.columns[1]].iloc[0]
-            individual_behavior["sitting_distance"] = df_sheet[df_sheet.columns[1]].iloc[3]
-            individual_behavior["sitting_angle"] = df_sheet[df_sheet.columns[1]].iloc[4]
-
-            social_behavior_col = df_sheet.iloc[:, 5]
-            nonsocial_behavior_col = df_sheet.iloc[:, 6]
-            
-            social_behavior_sum = pd.to_numeric(social_behavior_col, errors='coerce').sum()
-            nonsocial_behavior_sum = pd.to_numeric(nonsocial_behavior_col, errors='coerce').sum()
-
-            social_behavior_percentage = (social_behavior_sum/(social_behavior_sum + nonsocial_behavior_sum))*100
-
-            individual_behavior["social_behavior"] = social_behavior_sum
-            individual_behavior["nonsocial_behavior"] = nonsocial_behavior_sum
-            individual_behavior["social_behavior_percentage"] = social_behavior_percentage
-
-            individual_behaviors.append(individual_behavior)
-        except:
-            print("Exception for participant Id: ", name)
-    return individual_behaviors
-
-def generate_behavior_report(individual_behaviors, file_name):
-    """Generates behavior report which is calculated by calculate_behavior function & then saves as the provided file name"""
-
-    # Get the fieldnames from the first dictionary
-    fieldnames = individual_behaviors[0].keys()
-
-    # Open a CSV file for writing
-    with open(file_name, 'w', newline='') as csvfile:
-        # Create a writer object
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-        # Write the header
-        writer.writeheader()
-
-        # Write the data rows
-        for row in individual_behaviors:
-            writer.writerow(row)
-
-    print("CSV file has been created successfully.")
 
 def generate_interrater_reliablity_social_behavior_percentage(e_dict, u_dict):
     """Generates behavior report which is calculated by calculate_behavior function & then saves as the provided file name"""
@@ -140,23 +89,9 @@ def generate_interrater_reliablity_sitting_angle(e_dict, u_dict):
     print(f"Cohen's Kappa for sitting angle in terms of robot: {kappa}")
 
 
-# These coding sheets with the correspondent names should be present in this directory while running this script
-coding_sheet_name_1 = "coding_ehtesham.xlsx"
-coding_sheet_name_2 = "coding_usman.xlsx"
-
 # The generated behavior report files will have these correspondent names
 behavior_report_name_1 = "behavior_report_ehtesham.csv"
 behavior_report_name_2 = "behavior_report_usman.csv"
-
-# generate behavior report coded by coder 1: Ehtesham
-sheets_dict_e = pd.read_excel(coding_sheet_name_1, sheet_name=None)
-individual_behaviors_e = calculate_behavior(sheets_dict_e)    
-generate_behavior_report(individual_behaviors_e, behavior_report_name_1)
-
-# generate behavior report coded by coder 2: Usman
-sheets_dict_u = pd.read_excel(coding_sheet_name_2, sheet_name=None)
-individual_behaviors_u = calculate_behavior(sheets_dict_u)    
-generate_behavior_report(individual_behaviors_u, behavior_report_name_2)
 
 e_dict = pd.read_csv(behavior_report_name_1)
 u_dict = pd.read_csv(behavior_report_name_2)
