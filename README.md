@@ -14,7 +14,7 @@ pip install -r requirements.py
 
 ## Generate Behavior report
 
-To generate the behavior report you have to put raw coding files of two individual coders in this directory. The names of the files should be `coding_ehtesham.xlsx` & `coding_usman.xlsx` .
+To generate the behavior report you have to put raw coding files of two individual coders in this directory. The names of the files should be `coding_ehtesham.xlsx` & `coding_usman.xlsx` & those have to reside in `coding_archive/latest` directory .
 
 Then you run 
 
@@ -22,7 +22,7 @@ Then you run
 python behavior_report_generator.py
 ```
 
-This command will generate two behavior reports for each coder: `behavior_report_ehtesham.csv` and `behavior_report_usman.csv`. Each behavior report will include scores for social behavior, non-social behavior, and the percentage of social behavior for each participant.
+This command will generate two behavior reports for each coder: `behavior_report_ehtesham.csv` and `behavior_report_usman.csv` inside the `behavior_report` folder. Each behavior report will include scores for social behavior, non-social behavior, and the percentage of social behavior for each participant.
 
 ## Interrater reliability
 

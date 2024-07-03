@@ -90,8 +90,8 @@ def generate_interrater_reliablity_sitting_angle(e_dict, u_dict):
 
 
 # The generated behavior report files will have these correspondent names
-behavior_report_name_1 = "behavior_report_ehtesham.csv"
-behavior_report_name_2 = "behavior_report_usman.csv"
+behavior_report_name_1 = "./behavior_report/behavior_report_ehtesham.csv"
+behavior_report_name_2 = "./behavior_report/behavior_report_usman.csv"
 
 e_dict = pd.read_csv(behavior_report_name_1)
 u_dict = pd.read_csv(behavior_report_name_2)

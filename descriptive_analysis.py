@@ -69,9 +69,9 @@ def generate_descriptive_analysis(behavior_report_name, coder_name):
     plt.show()
 
 coder_name_1 = "Ehtesham"
-behavior_report_name_1 = "behavior_report_ehtesham.csv"
+behavior_report_name_1 = "./behavior_report/behavior_report_ehtesham.csv"
 coder_name_2 = "Usman"
-behavior_report_name_2 = "behavior_report_usman.csv"
+behavior_report_name_2 = "./behavior_report/behavior_report_usman.csv"
 
 generate_descriptive_analysis(behavior_report_name_1, coder_name_1)
 generate_descriptive_analysis(behavior_report_name_2, coder_name_2)
