@@ -14,7 +14,7 @@ pip install -r requirements.py
 
 ## Generate Behavior report
 
-To generate the behavior report you have to put raw coding files of two individual coders in this directory. The names of the files should be `coding_ehtesham.xlsx` & `coding_usman.xlsx` & those have to reside in `coding_archive/latest` directory .
+To generate the behavior report you have to put raw coding files of two individual coders in the `coding_archive/latest` directory. The names of the files should be `coding_ehtesham.xlsx` & `coding_usman.xlsx`.
 
 Then you run 
 
